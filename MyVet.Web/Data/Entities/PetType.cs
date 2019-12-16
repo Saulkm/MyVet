@@ -13,7 +13,7 @@ namespace MyVet.Web.Data.Entities
         [Display(Name ="Pet Type")]
         [MaxLength(50,ErrorMessage ="The {0} field cant not have more than {1} characters")]
         [Required(ErrorMessage ="The field {0} is mandatory")]
-        public int Name { get; set; }
+        public string Name { get; set; }
 
         public ICollection<Pet> Pets { get; set; }
     }

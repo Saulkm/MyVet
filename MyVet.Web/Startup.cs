@@ -10,6 +10,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using MyVet.Web.Data;
 using MyVet.Web.Data.Entities;
 
 namespace MyVet.Web
@@ -38,6 +39,7 @@ namespace MyVet.Web
                 cfg.UseSqlServer(Configuration.GetConnectionString("DefaultConnection"));
             });
 
+            services.AddTransient<SeedDb>();
         services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
         }
 
