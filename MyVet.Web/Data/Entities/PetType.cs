@@ -16,5 +16,7 @@ namespace MyVet.Web.Data.Entities
         public string Name { get; set; }
 
         public ICollection<Pet> Pets { get; set; }
+
+        public Owner Owner { get; set; }
     }
 }
