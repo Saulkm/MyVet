@@ -17,6 +17,7 @@ namespace MyVet.Web.Controllers
             _userHelper = userHelper;
         }
 
+        [HttpGet]
         public IActionResult Login()
         {
             if (User.Identity.IsAuthenticated)
@@ -49,11 +50,13 @@ namespace MyVet.Web.Controllers
             return View(model);
         }
 
+
+        [HttpGet]
         public async Task<IActionResult> Logout()
         {
             await _userHelper.LogoutAsync();
             return RedirectToAction("Index", "Home");
         }
-    }
 
+    }
 }

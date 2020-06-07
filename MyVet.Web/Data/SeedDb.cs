@@ -11,9 +11,7 @@ namespace MyVet.Web.Data
         private readonly DataContext _dataContext;
         private readonly IUserHelper _userHelper;
 
-        public SeedDb(
-            DataContext context,
-            IUserHelper userHelper)
+        public SeedDb(DataContext context,IUserHelper userHelper)
         {
             _dataContext = context;
             _userHelper = userHelper;
@@ -23,7 +21,7 @@ namespace MyVet.Web.Data
         {
             await _dataContext.Database.EnsureCreatedAsync();
             await CheckRoles();
-            var manager = await CheckUserAsync("1010", "Juan", "Zuluaga", "jzuluaga55@gmail.com", "350 634 2747", "Calle Luna Calle Sol", "Admin");
+            var manager = await CheckUserAsync("1010", "Saul", "Quichca", "saulqm1@gmail.com", "350 634 2747", "Calle Luna Calle Sol", "Admin");
             var customer = await CheckUserAsync("2020", "Juan", "Zuluaga", "jzuluaga55@hotmail.com", "350 634 2747", "Calle Luna Calle Sol", "Customer");
             await CheckPetTypesAsync();
             await CheckServiceTypesAsync();
@@ -39,7 +37,13 @@ namespace MyVet.Web.Data
             await _userHelper.CheckRoleAsync("Customer");
         }
 
-        private async Task<User> CheckUserAsync(string document, string firstName, string lastName, string email, string phone, string address, string role)
+        private async Task<User> CheckUserAsync(
+            string document, 
+            string firstName, 
+            string lastName, string email, 
+            string phone, 
+            string address, 
+            string role)
         {
             var user = await _userHelper.GetUserByEmailAsync(email);
             if (user == null)
@@ -89,8 +93,9 @@ namespace MyVet.Web.Data
         {
             if (!_dataContext.PetTypes.Any())
             {
-                _dataContext.PetTypes.Add(new PetType { Name = "Perro" });
-                _dataContext.PetTypes.Add(new PetType { Name = "Gato" });
+                _dataContext.PetTypes.Add(new PetType { Name = "Dog" });
+                _dataContext.PetTypes.Add(new PetType { Name = "Cat" });
+                _dataContext.PetTypes.Add(new PetType { Name = "Turtle" });
                 await _dataContext.SaveChangesAsync();
             }
         }
@@ -140,7 +145,7 @@ namespace MyVet.Web.Data
                         {
                             _dataContext.Agendas.Add(new Agenda
                             {
-                                Date = initialDate,
+                                Date = initialDate.ToUniversalTime(),
                                 IsAvailable = true
                             });
 
